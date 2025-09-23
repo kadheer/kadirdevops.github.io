@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdul Kadir Shaikh - DevOps Engineer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Language Toggle */
+        .language-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+
+        .lang-btn {
+            padding: 10px 15px;
+            background: rgba(255,255,255,0.9);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .lang-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .lang-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            position: relative;
+            z-index: 1;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
+            70% { box-shadow: 0 0 0 30px rgba(255, 255, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+            animation: slideInFromTop 1s ease-out;
+        }
+
+        @keyframes slideInFromTop {
+            0% { transform: translateY(-50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            position: relative;
+            z-index: 1;
+            animation: slideInFromBottom 1s ease-out 0.3s both;
+        }
+
+        @keyframes slideInFromBottom {
+            0% { transform: translateY(50px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Navigation */
+        .nav {
+            background: #2c3e50;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        .nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav li {
+            margin: 0;
+        }
+
+        .nav a {
+            display: block;
+            padding: 1rem 2rem;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav a:hover::before {
+            left: 100%;
+        }
+
+        .nav a:hover {
+            background: #34495e;
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 2rem;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            border-radius: 15px;
+            background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.4s; }
+        .section:nth-child(4) { animation-delay: 0.6s; }
+        .section:nth-child(5) { animation-delay: 0.8s; }
+
+        @keyframes fadeInUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .section h2 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .section h2::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-category {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-category h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            animation: bounceIn 0.5s ease-out;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Languages */
+        .languages {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .language-item {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            min-width: 120px;
+            transition: all 0.3s ease;
+        }
+
+        .language-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .language-item i {
+            font-size: 2rem;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Contact */
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: #667eea;
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            margin: 2rem 0;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #667eea, #764ba2);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-left: 1rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -1.5rem;
+            top: 1.5rem;
+            width: 12px;
+            height: 12px;
+            background: #667eea;
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px white, 0 0 0 6px #667eea;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                margin: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .nav ul {
+                flex-direction: column;
+            }
+
+            .nav a {
+                text-align: center;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info {
+                flex-direction: column;
+            }
+        }
+
+        /* Hide/Show Language Content */
+        .lang-content {
+            display: none;
+        }
+
+        .lang-content.active {
+            display: block;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Toggle -->
+    <div class="language-toggle">
+        <button class="lang-btn active" onclick="switchLanguage('de')">🇩🇪 Deutsch</button>
+        <button class="lang-btn" onclick="switchLanguage('en')">🇺🇸 English</button>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="profile-img">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="lang-content active" id="header-de">
+                <h1>Abdul Kadir Shaikh</h1>
+                <p>DevOps Engineer & Informatik Student</p>
+            </div>
+            <div class="lang-content" id="header-en">
+                <h1>Abdul Kadir Shaikh</h1>
+                <p>DevOps Engineer & Computer Science Student</p>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="nav">
+            <ul id="nav-de" class="lang-content active">
+                <li><a href="#about"><i class="fas fa-user"></i> Über Mich</a></li>
+                <li><a href="#experience"><i class="fas fa-briefcase"></i> Erfahrung</a></li>
+                <li><a href="#education"><i class="fas fa-graduation-cap"></i> Bildung</a></li>
+                <li><a href="#skills"><i class="fas fa-code"></i> Fähigkeiten</a></li>
+                <li><a href="#languages"><i class="fas fa-language"></i> Sprachen</a></li>
+                <li><a href="#contact"><i class="fas fa-envelope"></i> Kontakt</a></li>
+            </ul>
+            <ul id="nav-en" class="lang-content">
+                <li><a href="#about"><i class="fas fa-user"></i> About</a></li>
+                <li><a href="#experience"><i class="fas fa-briefcase"></i> Experience</a></li>
+                <li><a href="#education"><i class="fas fa-graduation-cap"></i> Education</a></li>
+                <li><a href="#skills"><i class="fas fa-code"></i> Skills</a></li>
+                <li><a href="#languages"><i class="fas fa-language"></i> Languages</a></li>
+                <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="main-content">
+            <!-- About Section -->
+            <section id="about" class="section">
+                <div class="lang-content active" id="about-de">
+                    <h2><i class="fas fa-user"></i> Über Mich</h2>
+                    <p>Ich bin Abdul Kadir Shaikh, ein motivierter DevOps-Engineer mit einem Bachelor-Abschluss in Bauingenieurwesen von der Mumbai University und vier Jahren Berufserfahrung. Derzeit studiere ich Ingenieur Informatik im 4. Semester an der Jade Hochschule in Deutschland und spezialisiere mich auf DevOps-Technologien.</p>
+                    <p>Meine Leidenschaft liegt in der Automatisierung von Entwicklungsprozessen, CI/CD-Pipelines und der Implementierung skalierbarer Cloud-Lösungen. Ich suche aktiv nach einem Praktikum, um meine Abschlussarbeit zu verfassen und praktische Erfahrungen in einem professionellen DevOps-Umfeld zu sammeln.</p>
+                    <a href="#contact" class="cta-button">Kontakt aufnehmen</a>
+                </div>
+                <div class="lang-content" id="about-en">
+                    <h2><i class="fas fa-user"></i> About Me</h2>
+                    <p>I am Abdul Kadir Shaikh, a motivated DevOps Engineer with a Bachelor's degree in Civil Engineering from Mumbai University and four years of professional experience. Currently, I'm pursuing my Master's in Computer Science (Ingenieur Informatik) in my 4th semester at Jade Hochschule, Germany, specializing in DevOps technologies.</p>
+                    <p>My passion lies in automating development processes, CI/CD pipelines, and implementing scalable cloud solutions. I'm actively seeking a Praktikum opportunity to write my thesis and gain hands-on experience in a professional DevOps environment.</p>
+                    <a href="#contact" class="cta-button">Get In Touch</a>
+                </div>
+            </section>
+
+            <!-- Experience Section -->
+            <section id="experience" class="section">
+                <div class="lang-content active" id="experience-de">
+                    <h2><i class="fas fa-briefcase"></i> Berufserfahrung</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <h3>DevOps Engineer</h3>
+                            <p><strong>4 Jahre Berufserfahrung</strong></p>
+                            <p>Umfangreiche Erfahrung in der Entwicklung und Wartung von CI/CD-Pipelines, Containerisierung mit Docker, Orchestrierung mit Kubernetes und Infrastructure as Code. Spezialisiert auf Automatisierung von Deployment-Prozessen und Monitoring von Produktionssystemen.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h3>Bauingenieur</h3>
+                            <p><strong>Mumbai University Background</strong></p>
+                            <p>Solide Grundlage in analytischem Denken, Projektmanagement und systematischer Problemlösung durch Bauingenieursstudium. Diese Fähigkeiten haben sich als wertvoll für die strukturierte Herangehensweise an DevOps-Herausforderungen erwiesen.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="lang-content" id="experience-en">
+                    <h2><i class="fas fa-briefcase"></i> Professional Experience</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <h3>DevOps Engineer</h3>
+                            <p><strong>4 Years Professional Experience</strong></p>
+                            <p>Extensive experience in developing and maintaining CI/CD pipelines, containerization with Docker, orchestration with Kubernetes, and Infrastructure as Code. Specialized in automating deployment processes and monitoring production systems.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h3>Civil Engineer</h3>
+                            <p><strong>Mumbai University Background</strong></p>
+                            <p>Strong foundation in analytical thinking, project management, and systematic problem-solving through Civil Engineering studies. These skills have proven valuable for structured approaches to DevOps challenges.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Education Section -->
+            <section id="education" class="section">
+                <div class="lang-content active" id="education-de">
+                    <h2><i class="fas fa-graduation-cap"></i> Bildung</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <h3>Master of Science - Ingenieur Informatik</h3>
+                            <p><strong>Jade Hochschule, Deutschland (4. Semester)</strong></p>
+                            <p>Vertiefung in Informatik mit Fokus auf DevOps, Software Engineering und moderne Entwicklungsmethoden. Vollständig deutschsprachiger Studiengang, der meine technischen und sprachlichen Fähigkeiten weiterentwickelt hat.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h3>Bachelor of Engineering - Bauingenieurwesen</h3>
+                            <p><strong>Mumbai University, Indien</strong></p>
+                            <p>Solide Grundlage in Ingenieursprinzipien, mathematischen Konzepten und analytischem Denken. Diese interdisziplinäre Ausbildung bietet eine einzigartige Perspektive für technische Problemlösungen.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="lang-content" id="education-en">
+                    <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <h3>Master of Science - Computer Science Engineering</h3>
+                            <p><strong>Jade Hochschule, Germany (4th Semester)</strong></p>
+                            <p>Specializing in Computer Science with focus on DevOps, Software Engineering, and modern development methodologies. Completely German-taught program that has enhanced both my technical and linguistic capabilities.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h3>Bachelor of Engineering - Civil Engineering</h3>
+                            <p><strong>Mumbai University, India</strong></p>
+                            <p>Strong foundation in engineering principles, mathematical concepts, and analytical thinking. This interdisciplinary background provides a unique perspective for technical problem-solving.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Skills Section -->
+            <section id="skills" class="section">
+                <div class="lang-content active" id="skills-de">
+                    <h2><i class="fas fa-code"></i> Technische Fähigkeiten</h2>
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <h3><i class="fab fa-python"></i> Programmiersprachen</h3>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Python</span>
+                                <span class="skill-tag">Java</span>
+                                <span class="skill-tag">C++</span>
+                                <span class="skill-tag">Bash Shell Scripting</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h3><i class="fas fa-cogs"></i> DevOps Technologien</h3>
+                            <div class="skill-tags">
+                                <span class="skill-tag">CI/CD</span>
+                                <span class="skill-tag">Docker</span>
+                                <span class="skill-tag">Kubernetes</span>
+                                <span class="skill-tag">Jenkins</span>
+                                <span class="skill-tag">Git</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h3><i class="fas fa-mobile-alt"></i> Weitere Technologien</h3>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Android Development</span>
+                                <span class="skill-tag">Scrum</span>
+                                <span class="skill-tag">Agile Methodologies</span>
+                                <span class="skill-tag">Linux Administration</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lang-content" id="skills-en">
+                    <h2><i class="fas fa-code"></i> Technical Skills</h2>
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <h3><i class="fab fa-python"></i> Programming Languages</h3>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Python</span>
+                                <span class="skill-tag">Java</span>
+                                <span class="skill-tag">C++</span>
+                                <span class="skill-tag">Bash Shell Scripting</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h3><i class="fas fa-cogs"></i> DevOps Technologies</h3>
+                            <div class="skill-tags">
+                                <span class="skill-tag">CI/CD</span>
+                                <span class="skill-tag">Docker</span>
+                                <span class="skill-tag">Kubernetes</span>
+                                <span class="skill-tag">Jenkins</span>
+                                <span class="skill-tag">Git</span>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <h3><i class="fas fa-mobile-alt"></i> Additional Technologies</h3>
+                            <div class="skill-tags">
+                                <span class="skill-tag">Android Development</span>
+                                <span class="skill-tag">Scrum</span>
+                                <span class="skill-tag">Agile Methodologies</span>
+                                <span class="skill-tag">Linux Administration</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Languages Section -->
+            <section id="languages" class="section">
+                <div class="lang-content active" id="languages-de">
+                    <h2><i class="fas fa-language"></i> Sprachkenntnisse</h2>
+                    <div class="languages">
+                        <div class="language-item">
+                            <i class="fas fa-globe"></i>
+                            <h4>Englisch</h4>
+                            <p>Fließend</p>
+                        </div>
+                        <div class="language-item">
+                            <i class="fas fa-flag"></i>
+                            <h4>Deutsch</h4>
+                            <p>Fließend</p>
+                        </div>
+                        <div class="language-item">
+                            <i class="fas fa-heart"></i>
+                            <h4>Hindi</h4>
+                            <p>Muttersprache</p>
+                        </div>
+                        <div class="language-item">
+                            <i class="fas fa-star"></i>
+                            <h4>Marathi</h4>
+                            <p>Fließend</p>
+                        </div>
+                        <div class="language-item">
+                            <i class="fas fa-moon"></i>
+                            <h4>Arabisch</h4>
+                            <p>Fließend</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="lang-content" id="languages-en">
+                    <h2><i class="fas fa-language"></i> Language Skills</h2>
+                    <div class="languages">
+                        <div class="language-item">
+                            <i class="fas fa-globe"></i>
+                            <h4>English</h4>
+                            <p>Fluent</p>
+                        </div>
+                        <div class="language-item">
+                            <i class="fas fa-flag"></i>
+                            <h4>German</h4>
+                            <p>Fluent</p>
+                        </div>
+                        <div class="language-item">
+                            <i class="fas fa-heart"></i>
+                            <h4>Hindi</h4>
+                            <p>Native</p>
+                        </div>
+                        <div class="language-item">
+                            <i class="fas fa-star"></i>
+                            <h4>Marathi</h4>
+                            <p>Fluent</p>
+                        </div>
+                        <div class="language-item">
+                            <i class="fas fa-moon"></i>
+                            <h4>Arabic</h4>
+                            <p>Fluent</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="section">
+                <div class="lang-content active" id="contact-de">
+                    <h2><i class="fas fa-envelope"></i> Kontakt</h2>
+                    <p>Ich bin auf der Suche nach einem Praktikum für meine Abschlussarbeit und freue mich über Gelegenheiten im DevOps-Bereich. Kontaktieren Sie mich gerne!</p>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <strong>E-Mail</strong>
+                                <p>kadirengg@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <strong>Standort</strong>
+                                <p>Deutschland</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-briefcase"></i>
+                            <div>
+                                <strong>Verfügbarkeit</strong>
+                                <p>Sofort für Praktikum</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <div>
+                                <strong>Status</strong>
+                                <p>4. Semester Master-Student</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lang-content" id="contact-en">
+                    <h2><i class="fas fa-envelope"></i> Contact</h2>
+                    <p>I'm actively seeking a Praktikum opportunity for my thesis and would love to explore DevOps opportunities. Feel free to reach out!</p>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <strong>Email</strong>
+                                <p>kadirengg@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <strong>Location</strong>
+                                <p>Germany</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-briefcase"></i>
+                            <div>
+                                <strong>Availability</strong>
+                                <p>Immediately for Praktikum</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <div>
+                                <strong>Status</strong>
+                                <p>4th Semester Master's Student</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // Language switching functionality
+        let currentLang = 'de';
+
+        function switchLanguage(lang) {
+            currentLang = lang;
+            
+            // Hide all language content
+            document.querySelectorAll('.lang-content').forEach(element => {
+                element.classList.remove('active');
+            });
+            
+            // Show selected language content
+            document.querySelectorAll(`[id$="-${lang}"]`).forEach(element => {
+                element.classList.add('active');
+            });
+            
+            // Update language buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Update document language
+            document.documentElement.lang = lang;
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll-based animations
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.section');
+            const windowHeight = window.innerHeight;
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    element.style.transform = 'translateY(0)';
+                    element.style.opacity = '1';
+                }
+            });
+        }
+
+        // Parallax effect for header background
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const header = document.querySelector('.header');
+            if (header) {
+                header.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+            
+            animateOnScroll();
+        });
+
+        // Add typing effect to header
+        function typeWriter(element, text, speed = 100) {
+            let i = 0;
+            element.innerHTML = '';
+            
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Initialize animations when page loads
+        window.addEventListener('load', () => {
+            const headerTitle = document.querySelector('.header h1');
+            if (headerTitle) {
+                const originalText = headerTitle.textContent;
+                typeWriter(headerTitle, originalText, 150);
+            }
+            
+            // Stagger skill tag animations
+            const skillTags = document.querySelectorAll('.skill-tag');
+            skillTags.forEach((tag, index) => {
+                tag.style.animationDelay = `${index * 0.1}s`;
+            });
+            
+            animateOnScroll();
+        });
+
+        // Add interactive hover effects
+        document.querySelectorAll('.skill-category').forEach(category => {
+            category.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            category.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(-5px) scale(1)';
+            });
+        });
+
+        // Add click effect to contact items
+        document.querySelectorAll('.contact-item').forEach(item => {
+            item.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'translateY(-3px) scale(1)';
+                }, 150);
+            });
+        });
+
+        // Add floating animation to profile image
+        const profileImg = document.querySelector('.profile-img');
+        if (profileImg) {
+            setInterval(() => {
+                profileImg.style.transform = 'translateY(-5px)';
+                setTimeout(() => {
+                    profileImg.style.transform = 'translateY(0)';
+                }, 1000);
+            }, 2000);
+        }
+
+        // Easter egg: Konami code
+        let konamiCode = '';
+        const konamiSequence = 'ArrowUpArrowUpArrowDownArrowDownArrowLeftArrowRightArrowLeftArrowRightKeyBKeyA';
+        
+        document.addEventListener('keydown', (e) => {
+            konamiCode += e.code;
+            if (konamiCode.length > konamiSequence.length) {
+                konamiCode = konamiCode.slice(-konamiSequence.length);
+            }
+            
+            if (konamiCode === konamiSequence) {
+                document.body.style.animation = 'rainbow 2s infinite';
+                setTimeout(() => {
+                    document.body.style.animation = '';
+                }, 5000);
+            }
+        });
+
+        // Add rainbow animation for easter egg
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes rainbow {
+                0% { filter: hue-rotate(0deg); }
+                100% { filter: hue-rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Add particle effect on skill tag hover
+        document.querySelectorAll('.skill-tag').forEach(tag => {
+            tag.addEventListener('mouseenter', function(e) {
+                createParticles(e.pageX, e.pageY);
+            });
+        });
+
+        function createParticles(x, y) {
+            for (let i = 0; i < 5; i++) {
+                const particle = document.createElement('div');
+                particle.style.position = 'fixed';
+                particle.style.left = x + 'px';
+                particle.style.top = y + 'px';
+                particle.style.width = '4px';
+                particle.style.height = '4px';
+                particle.style.background = '#667eea';
+                particle.style.borderRadius = '50%';
+                particle.style.pointerEvents = 'none';
+                particle.style.zIndex = '9999';
+                
+                document.body.appendChild(particle);
+                
+                const angle = (Math.PI * 2 * i) / 5;
+                const velocity = 2;
+                
+                let dx = Math.cos(angle) * velocity;
+                let dy = Math.sin(angle) * velocity;
+                
+                function animateParticle() {
+                    const currentX = parseFloat(particle.style.left);
+                    const currentY = parseFloat(particle.style.top);
+                    
+                    particle.style.left = (currentX + dx) + 'px';
+                    particle.style.top = (currentY + dy) + 'px';
+                    particle.style.opacity = parseFloat(particle.style.opacity || 1) - 0.02;
+                    
+                    if (parseFloat(particle.style.opacity) > 0) {
+                        requestAnimationFrame(animateParticle);
+                    } else {
+                        particle.remove();
+                    }
+                }
+                
+                requestAnimationFrame(animateParticle);
+            }
+        }
+    </script>
+</body>
+</html>
