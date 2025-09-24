@@ -1190,17 +1190,32 @@
         // Scroll animations
         function animateOnScroll() {
             const elements = document.querySelectorAll('.section');
+            const timelineItems = document.querySelectorAll('.timeline-item');
             const windowHeight = window.innerHeight;
-            
+    
             elements.forEach(element => {
                 const elementTop = element.getBoundingClientRect().top;
                 const elementVisible = 150;
-                
+        
                 if (elementTop < windowHeight - elementVisible) {
-                    element.classList.add('visible');
-                }
-            });
-        }
+                element.classList.add('visible');
+            }
+        });
+    
+            timelineItems.forEach(item => {
+                const itemTop = item.getBoundingClientRect().top;
+                if (itemTop < windowHeight - 100) {
+                    item.classList.add('visible');
+            }
+        });
+    }
+Summary Table for Your File:
+Action	Approximate Line Numbers
+Add CSS animation rules inside <style>	Lines 95 to 140
+Extend animateOnScroll JS function	Around line 900
+With these line numbers and modifications, your animations will smoothly integrate into your existing codebase, adding highlights and flashing effects to headings, buttons, skill tags, timelines, language toggles, and your profile image.
+
+If you want, I can generate the entire modified file including these injections. Let me know if needed!
 
         // Scroll to top button
         const scrollToTopBtn = document.getElementById('scrollToTop');
