@@ -125,19 +125,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 4.5rem;
+            color: white;
             position: relative;
             box-shadow: 0 15px 35px rgba(0,0,0,0.2);
             border: 5px solid rgba(255,255,255,0.2);
+            animation: pulse 3s ease-in-out infinite;
             overflow: hidden;
         }
-        .profile-photo {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-            display: block;
-        }
-
 
         /* Base64 Image Placeholder - Replace this with your actual base64 image */
         .profile-img::after {
@@ -704,7 +699,8 @@
         <div class="header">
             <div class="profile-container">
                 <div class="profile-img">
-                    <img src="images/akmain.jpg" alt="Profile picture" class="profile-photo">
+                    <!-- Base64 Image Placeholder - Replace the following line with your actual base64 image -->
+                    <!-- <img src="images/akmain.jpg" alt="Profile picture" class="profile-img">
                 </div>
                 <div class="lang-content active" id="header-de">
                     <h1>Abdul Kadir Shaikh</h1>
